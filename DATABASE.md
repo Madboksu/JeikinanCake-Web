@@ -95,20 +95,38 @@ php spark migrate
 
 Seeder digunakan untuk mengisi data awal ke tabel (misal data admin atau kategori default).
 
-### **Membuat & Menjalankan Seeder**
-1. Buat file Seeder:
-   ```bash
-   php spark make:seeder AdminSeeder
-   ```
-2. Isi data pada method `run()` di `app/Database/Seeds/AdminSeeder.php`.
-3. Jalankan seeder:
-   ```bash
-   php spark db:seed AdminSeeder
-   ```
+### **Cara Menjalankan Seeder**
 
-> [!NOTE]
-> **Apakah Seeder perlu dijalankan setiap kali `git pull`?**
-> **TIDAK PERLU.** Seeder cukup dijalankan sekali saat setup database baru atau setelah melakukan reset database (`php spark migrate:refresh`). Setiap kali `git pull`, Anda cukup menjalankan `php spark migrate`.
+#### **Opsi A: Menjalankan Sekaligus (Master Seeder)**
+Digunakan untuk memasukkan **seluruh data awal sekaligus** ke semua tabel.
+
+```bash
+php spark db:seed DatabaseSeeder
+```
+
+> [!IMPORTANT]
+> **CATATAN PENTING:**
+> Menjalankan seeder sekaligus (`DatabaseSeeder`) **hanya dilakukan 1 kali pada saat PERTAMA KALI setup database lokal baru** (atau setelah melakukan reset database `php spark migrate:refresh`). Jika dijalankan berulang kali pada DB yang sudah terisi, akan muncul error *Duplicate entry* karena constraint UNIQUE pada tabel.
+
+#### **Opsi B: Menjalankan Satu per Satu (Per Tabel)**
+Digunakan jika Anda **hanya ingin mengisi data pada 1 tabel tertentu** (misal saat menambah fitur baru atau hanya ingin menambah data seeder tertentu):
+
+```bash
+# Mengisi tabel category saja
+php spark db:seed CategorySeeder
+
+# Mengisi tabel admin saja
+php spark db:seed AdminSeeder
+
+# Mengisi tabel testimonial saja
+php spark db:seed TestimonialSeeder
+
+# Mengisi tabel product saja
+php spark db:seed ProductSeeder
+
+# Mengisi tabel store_information saja
+php spark db:seed StoreInformationSeeder
+```
 
 ---
 
@@ -153,6 +171,22 @@ Aplikasi ini menggunakan 4 tabel utama:
 | `created_at` | DATETIME | Tanggal dibuat |
 | `updated_at` | DATETIME | Tanggal diubah |
 | `category_id` | INT (11) Unsigned | Foreign Key ➔ `category(category_id)` ON DELETE CASCADE |
+
+### **5. `store_information`**
+| Kolom | Tipe Data | Keterangan |
+| :--- | :--- | :--- |
+| `store_id` | INT (11) Unsigned | Primary Key, Auto Increment, Not Null |
+| `store_name` | VARCHAR (100) | Not Null, Nama toko |
+| `store_logo` | VARCHAR (255) | Path logo toko |
+| `store_description` | TEXT | Deskripsi singkat toko |
+| `store_image` | VARCHAR (255) | Path foto toko |
+| `hero_image` | VARCHAR (255) | Path banner hero |
+| `address` | VARCHAR (255) | Alamat toko |
+| `whatsapp` | VARCHAR (255) | Nomor WhatsApp toko |
+| `instagram` | VARCHAR (255) | Akun Instagram toko |
+| `opening_hours` | VARCHAR (255) | Jam operasional toko |
+| `created_at` | DATETIME | Tanggal dibuat |
+| `updated_at` | DATETIME | Tanggal diubah |
 
 ---
 
