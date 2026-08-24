@@ -1,69 +1,56 @@
-# CodeIgniter 4 Application Starter
+# 🍰 JeikinanCake Web Application
 
-## What is CodeIgniter?
+Aplikasi Web **JeikinanCake** yang dibangun menggunakan framework **CodeIgniter 4**.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 🚀 Quick Start (Panduan Singkat)
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+### 1. Clone & Install Dependensi
+```bash
+git clone <URL_REPOSITORY_ANDA>
+cd JeikinanCake-Web
+composer install
+```
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### 2. Setup Environment
+Salin file templat `env` menjadi `.env`:
+```bash
+cp env .env
+```
+*(Sesuaikan konfigurasi `app.baseURL` dan kredensial database lokal Anda di file `.env`)*
 
-## Installation & updates
+### 3. Setup Database & Migrasi
+Untuk panduan lengkap mengenai setup database, pembuatan user MySQL/MariaDB, dan alur kerja migrasi, silakan merujuk ke dokumentasi khusus database:
+👉 **[DATABASE.md](DATABASE.md)**
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+Jalankan perintah cepat migrasi:
+```bash
+php spark db:create jenkeinans-cake
+php spark migrate
+```
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+### 4. Menjalankan Server Lokal
+```bash
+php spark serve
+```
+Akses aplikasi melalui browser: **`http://localhost:8080`**
 
-## Setup
+---
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## 📚 Dokumentasi Terkait
+* 🗃️ **[Panduan Setup & Dokumentasi Database](DATABASE.md)**
+* 📑 **[User Guide Resmi CodeIgniter 4](https://codeigniter.com/user_guide/)**
 
-## Important Change with index.php
+---
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## 🛠️ Perintah CLI Spark Utama
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.2 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+| Perintah | Fungsi |
+| :--- | :--- |
+| `php spark serve` | Menjalankan server lokal |
+| `php spark migrate` | Menjalankan migrasi database |
+| `php spark make:controller` | Membuat file Controller baru |
+| `php spark make:model` | Membuat file Model baru |
+| `php spark make:migration` | Membuat file Migration baru |
+| `php spark make:seeder` | Membuat file Seeder baru |
