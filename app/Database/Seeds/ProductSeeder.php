@@ -41,7 +41,7 @@ class ProductSeeder extends Seeder
                 'product_desc'           => 'Kue spons dengan potongan buah stroberi segar dan krim pilihan.',
                 'product_price'          => 150000.00,
                 'product_is_available'   => true,
-                'product_is_best_seller' => false,
+                'product_is_best_seller' => true,
                 'product_slug'           => 'strawberry-shortcake',
                 'created_at'             => $now,
                 'updated_at'             => $now,

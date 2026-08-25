@@ -53,20 +53,37 @@
         </section>
 
         <!-- 4. SECTION BEST SELLERS -->
-        <section id="best-sellers">
-            <h2>Best Sellers</h2>
-            <div class="product-cards">
-                
-                <div class="card">
-                    <img src="choco-hazelnut.jpg" alt="Choco Hazelnut Crumb">
-                    <h3>Choco Hazelnut Crumb</h3>
-                    <p>Rp. 58,000.00 /pcs</p>
-                    <button>Buy Now 🛒</button>
-                </div>
-                
+        <section id="best-sellers" class="best-sellers-section">
+
+            <div class="section-header">
+                <h2>Best Sellers</h2>
             </div>
             
-            <a href="/product" class="view-all">View all ></a>
+            <div class="product-grid">
+                <!-- Looping PHP dari Controller -->
+                <?php foreach ($best_sellers as $produk) : ?>
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="<?= base_url('image/' . $produk['product_image']); ?>" alt="<?= $produk['product_name']; ?>">
+                    </div>
+                    <div class="product-info">
+                        <h3><?= $produk['product_name']; ?></h3>
+                        <p class="price">Rp. <?= number_format($produk['product_price'], 2, ',', '.'); ?> /pcs</p>
+                        
+                        <div class="card-actions">
+                            <button class="btn-buy">Buy Now</button>
+                            <button class="btn-cart">🛒</button> 
+
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+
+            <div class="section-footer">
+                <a href="/product" class="view-all">View all ></a>
+            </div>
         </section>
 
         <!-- 5. SECTION REVIEW -->
@@ -84,7 +101,7 @@
 
     </main>
 
-    <!-- 6. FOOTER (Juga bertindak sebagai Contact) -->
+    <!-- 6. FOOTER -->
     <footer id="contact">
         <h2>jenkeinancake.com</h2>
         <div class="social-media">

@@ -92,8 +92,8 @@ nav .cart {
 }
 
 .search-bar-wrapper{
-    position: sticky;
-    top: 90px;
+    
+    top: 98px;
     z-index: 99;
     display: flex;
     justify-content: center;
@@ -169,4 +169,111 @@ nav .cart {
     line-height: 1.8; 
     margin-bottom: 15px;
     text-align: justify; 
+}
+
+
+.best-sellers-section {
+    padding: 50px 5%;
+    background-color: #314424; 
+    text-align: center;
+}
+
+.section-header {
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #ffffff; 
+    margin: 0;
+}
+
+.section-footer {
+    margin-top: 30px;
+}
+
+.view-all {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto; 
+}
+
+.product-card {
+    background: #ffffff;
+    border-radius: 20px; 
+    padding: 15px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px; 
+}
+
+
+.product-info {
+    padding: 15px 0 5px 0;
+}
+
+.product-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 700;
+}
+
+.price {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 15px;
+}
+
+
+.card-actions {
+    display: flex;
+    gap: 10px; 
+
+.btn-buy {
+    background-color: #314424; 
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    flex-grow: 1;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.btn-cart {
+    background-color: #314424;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-buy:hover, .btn-cart:hover {
+    opacity: 0.85;
 }
