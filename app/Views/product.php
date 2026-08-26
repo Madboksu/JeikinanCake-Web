@@ -14,15 +14,30 @@
 <body>
     <!-- Top Navigation Bar (Identical to Landing Page) -->
     <nav>
-        <div class="logo">JEN-<br>KEINAN'S<br>CAKE</div>
-        <ul class="menu">
+        <div class="logo">
+            <?php if (!empty($store['store_name'])) : ?>
+                <?= esc($store['store_name']) ?>
+            <?php else : ?>
+                JEN-<br>KEINAN'S<br>CAKE
+            <?php endif; ?>
+        </div>
+        <ul class="menu" id="navMenu">
             <li><a href="<?= base_url('/#home') ?>">Home</a></li>
             <li><a href="<?= base_url('/#about') ?>">About</a></li>
             <li><a href="<?= base_url('product') ?>">Product</a></li>
             <li><a href="<?= base_url('/#review') ?>">Review</a></li>
             <li><a href="<?= base_url('/#contact') ?>">Contact</a></li>
         </ul>
-        <div class="cart"><img src="<?= base_url('icon/cart.png'); ?>" alt="cart" width="24" height="24"></div>
+        <div class="nav-right">
+            <div class="cart">
+                <a href="<?= base_url('product') ?>" title="Katalog Produk">
+                    <img src="<?= base_url('icon/cart.png'); ?>" alt="cart" width="24" height="24">
+                </a>
+            </div>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
     </nav>
 
     <!-- Main Catalog Container -->
@@ -50,6 +65,14 @@
 
         <!-- Sidebar & Product Grid Area -->
         <div class="catalog-container">
+            <!-- Mobile Filter & Sort Toggle Button -->
+            <div class="mobile-filter-toggle-wrapper">
+                <button class="mobile-filter-btn" id="mobileFilterBtn" aria-label="Toggle Filter & Sort">
+                    <span><i class="fa-solid fa-sliders" style="margin-right: 8px;"></i> Filter & Urutkan</span>
+                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                </button>
+            </div>
+
             <!-- Left Sidebar Filters -->
             <aside class="catalog-sidebar">
                 <!-- Sorted By Card -->
@@ -219,6 +242,50 @@
             const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="230"><rect width="100%" height="100%" fill="#edf2ea"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#314424" font-size="14" font-family="sans-serif">${label}</text></svg>`;
             el.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const navMenu = document.getElementById('navMenu');
+
+            if (hamburgerBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', function () {
+                    navMenu.classList.toggle('active');
+                    const icon = hamburgerBtn.querySelector('i');
+                    if (icon) {
+                        if (navMenu.classList.contains('active')) {
+                            icon.className = 'fa-solid fa-xmark';
+                        } else {
+                            icon.className = 'fa-solid fa-bars';
+                        }
+                    }
+                });
+
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        navMenu.classList.remove('active');
+                        const icon = hamburgerBtn.querySelector('i');
+                        if (icon) {
+                            icon.className = 'fa-solid fa-bars';
+                        }
+                    });
+                });
+            }
+
+            // Mobile Filter & Sort Toggle Handler
+            const mobileFilterBtn = document.getElementById('mobileFilterBtn');
+            const catalogSidebar = document.querySelector('.catalog-sidebar');
+
+            if (mobileFilterBtn && catalogSidebar) {
+                mobileFilterBtn.addEventListener('click', function () {
+                    catalogSidebar.classList.toggle('active');
+                    const arrow = mobileFilterBtn.querySelector('.toggle-arrow');
+                    if (arrow) {
+                        arrow.style.transform = catalogSidebar.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>

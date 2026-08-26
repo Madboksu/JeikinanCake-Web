@@ -23,17 +23,22 @@
                 JEN-<br>KEINAN'S<br>CAKE
             <?php endif; ?>
         </div>
-        <ul class="menu">
+        <ul class="menu" id="navMenu">
             <li><a href="<?= base_url('/#home') ?>">Home</a></li>
             <li><a href="<?= base_url('/#about') ?>">About</a></li>
             <li><a href="<?= base_url('product') ?>">Product</a></li> 
             <li><a href="<?= base_url('/#review') ?>">Review</a></li>
             <li><a href="<?= base_url('/#contact') ?>">Contact</a></li>
         </ul>
-        <div class="cart">
-            <a href="<?= base_url('product') ?>" title="Katalog Produk">
-                <img src="<?= base_url('icon/cart.png'); ?>" alt="cart" width="24" height="24">
-            </a>
+        <div class="nav-right">
+            <div class="cart">
+                <a href="<?= base_url('product') ?>" title="Katalog Produk">
+                    <img src="<?= base_url('icon/cart.png'); ?>" alt="cart" width="24" height="24">
+                </a>
+            </div>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
     </nav>
 
@@ -228,6 +233,35 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Navbar Toggle Handler
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const navMenu = document.getElementById('navMenu');
+
+            if (hamburgerBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', function () {
+                    navMenu.classList.toggle('active');
+                    const icon = hamburgerBtn.querySelector('i');
+                    if (icon) {
+                        if (navMenu.classList.contains('active')) {
+                            icon.className = 'fa-solid fa-xmark';
+                        } else {
+                            icon.className = 'fa-solid fa-bars';
+                        }
+                    }
+                });
+
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        navMenu.classList.remove('active');
+                        const icon = hamburgerBtn.querySelector('i');
+                        if (icon) {
+                            icon.className = 'fa-solid fa-bars';
+                        }
+                    });
+                });
+            }
+
             const grid = document.getElementById('testimonialSlider');
             const dotsContainer = document.getElementById('testimonialDots');
             
