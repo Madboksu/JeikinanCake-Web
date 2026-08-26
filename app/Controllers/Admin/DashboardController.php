@@ -93,7 +93,7 @@ class DashboardController extends BaseController
             $this->storeModel->insert($updateData);
         }
 
-        return redirect()->to(base_url('admin/dashboard#store-section'))
+        return redirect()->to(base_url('admin/dashboard'))
             ->with('success', 'Teks dan gambar landing page berhasil diperbarui!');
     }
 }

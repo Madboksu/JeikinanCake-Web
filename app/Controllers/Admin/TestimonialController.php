@@ -26,7 +26,7 @@ class TestimonialController extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->to(base_url('admin/dashboard#testimonials-section'))
+            return redirect()->to(base_url('admin/dashboard'))
                 ->withInput()->with('error', 'Mohon lengkapi formulir testimoni dengan benar.');
         }
 
@@ -51,7 +51,7 @@ class TestimonialController extends BaseController
 
         $this->testimonialModel->insert($data);
 
-        return redirect()->to(base_url('admin/dashboard#testimonials-section'))
+        return redirect()->to(base_url('admin/dashboard'))
             ->with('success', 'Testimoni berhasil ditambahkan!');
     }
 
@@ -62,7 +62,7 @@ class TestimonialController extends BaseController
     {
         $testimonial = $this->testimonialModel->find($id);
         if (!$testimonial) {
-            return redirect()->to(base_url('admin/dashboard#testimonials-section'))
+            return redirect()->to(base_url('admin/dashboard'))
                 ->with('error', 'Testimoni tidak ditemukan.');
         }
 
@@ -85,7 +85,7 @@ class TestimonialController extends BaseController
 
         $this->testimonialModel->update($id, $data);
 
-        return redirect()->to(base_url('admin/dashboard#testimonials-section'))
+        return redirect()->to(base_url('admin/dashboard'))
             ->with('success', 'Testimoni berhasil diperbarui!');
     }
 
@@ -97,11 +97,11 @@ class TestimonialController extends BaseController
         $testimonial = $this->testimonialModel->find($id);
         if ($testimonial) {
             $this->testimonialModel->delete($id);
-            return redirect()->to(base_url('admin/dashboard#testimonials-section'))
+            return redirect()->to(base_url('admin/dashboard'))
                 ->with('success', 'Testimoni berhasil dihapus.');
         }
 
-        return redirect()->to(base_url('admin/dashboard#testimonials-section'))
+        return redirect()->to(base_url('admin/dashboard'))
             ->with('error', 'Testimoni tidak ditemukan.');
     }
 }

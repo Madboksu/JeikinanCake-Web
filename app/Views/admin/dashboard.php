@@ -57,7 +57,7 @@
                 <?php if (!empty($store['store_logo'])) : ?>
                     <div style="margin-top: 10px;">
                         <span style="font-size: 12px; color: var(--text-muted);">Logo Saat Ini:</span><br>
-                        <img src="<?= base_url('image/' . $store['store_logo']) ?>" alt="Logo" class="img-thumb" style="width: 80px; height: 80px; margin-top: 4px;" onerror="this.src='https://via.placeholder.com/80?text=Logo'">
+                        <img src="<?= base_url('image/' . $store['store_logo']) ?>" alt="Logo" class="img-thumb" style="width: 80px; height: 80px; margin-top: 4px;" onerror="handleImgError(this, 'Logo')">
                     </div>
                 <?php endif; ?>
             </div>
@@ -68,7 +68,7 @@
                 <?php if (!empty($store['hero_image'])) : ?>
                     <div style="margin-top: 10px;">
                         <span style="font-size: 12px; color: var(--text-muted);">Hero Banner Saat Ini:</span><br>
-                        <img src="<?= base_url('image/' . $store['hero_image']) ?>" alt="Hero Banner" class="img-thumb" style="width: 120px; height: 70px; margin-top: 4px;" onerror="this.src='https://via.placeholder.com/120?text=Hero'">
+                        <img src="<?= base_url('image/' . $store['hero_image']) ?>" alt="Hero Banner" class="img-thumb" style="width: 120px; height: 70px; margin-top: 4px;" onerror="handleImgError(this, 'Hero')">
                     </div>
                 <?php endif; ?>
             </div>
@@ -79,7 +79,7 @@
                 <?php if (!empty($store['store_image'])) : ?>
                     <div style="margin-top: 10px;">
                         <span style="font-size: 12px; color: var(--text-muted);">Store Image Saat Ini:</span><br>
-                        <img src="<?= base_url('image/' . $store['store_image']) ?>" alt="Store Image" class="img-thumb" style="width: 80px; height: 80px; margin-top: 4px;" onerror="this.src='https://via.placeholder.com/80?text=Store'">
+                        <img src="<?= base_url('image/' . $store['store_image']) ?>" alt="Store Image" class="img-thumb" style="width: 80px; height: 80px; margin-top: 4px;" onerror="handleImgError(this, 'Store')">
                     </div>
                 <?php endif; ?>
             </div>
@@ -209,7 +209,7 @@
                     <?php foreach ($testimonials as $t) : ?>
                         <tr>
                             <td>
-                                <img src="<?= base_url('image/' . $t['testimonial_image']) ?>" alt="<?= esc($t['testimonial_name']) ?>" class="img-thumb" style="border-radius: 50%;" onerror="this.src='https://via.placeholder.com/50?text=User'">
+                                <img src="<?= base_url('image/' . $t['testimonial_image']) ?>" alt="<?= esc($t['testimonial_name']) ?>" class="img-thumb" style="border-radius: 50%;" onerror="handleImgError(this, 'User')">
                             </td>
                             <td><strong><?= esc($t['testimonial_name']) ?></strong></td>
                             <td>
@@ -391,7 +391,7 @@
                     <?php foreach ($products as $p) : ?>
                         <tr>
                             <td>
-                                <img src="<?= base_url('image/' . $p['product_image']) ?>" alt="<?= esc($p['product_name']) ?>" class="img-thumb" onerror="this.src='https://via.placeholder.com/50?text=Cake'">
+                                <img src="<?= base_url('image/' . $p['product_image']) ?>" alt="<?= esc($p['product_name']) ?>" class="img-thumb" onerror="handleImgError(this, 'Cake')">
                             </td>
                             <td>
                                 <strong><?= esc($p['product_name']) ?></strong>

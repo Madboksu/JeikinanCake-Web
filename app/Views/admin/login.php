@@ -17,10 +17,10 @@
             --text-dark: #2E3C18;
             --text-body: #3d2c1e;
             --text-muted: #6e7860;
-            --green-primary: #2e7d32;
-            --green-hover: #1e5320;
-            --green-light: #e8f5e9;
-            --green-border: #a5d6a7;
+            --green-primary: #314424;
+            --green-hover: #202d18;
+            --green-light: #edf2ea;
+            --green-border: #a3b899;
             --red-accent: #d32f2f;
             --red-light: #ffebee;
         }
@@ -49,7 +49,7 @@
             width: 100%;
             max-width: 420px;
             padding: 40px 32px;
-            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.08);
+            box-shadow: 0 10px 30px rgba(49, 68, 36, 0.08);
         }
 
         .brand-header {
@@ -68,7 +68,7 @@
             margin: 0 auto 16px;
             color: #ffffff;
             font-size: 32px;
-            box-shadow: 0 6px 16px rgba(46, 125, 50, 0.25);
+            box-shadow: 0 6px 16px rgba(49, 68, 36, 0.25);
         }
 
         .brand-title {
@@ -103,7 +103,7 @@
         .alert-success {
             background: var(--green-light);
             border: 1px solid var(--green-border);
-            color: #1b5e20;
+            color: var(--green-primary);
         }
 
         .form-group {
@@ -147,7 +147,7 @@
         .form-control:focus {
             outline: none;
             border-color: var(--green-primary);
-            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+            box-shadow: 0 0 0 3px rgba(49, 68, 36, 0.15);
         }
 
         .toggle-password {
@@ -177,7 +177,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 6px 18px rgba(46, 125, 50, 0.2);
+            box-shadow: 0 6px 18px rgba(49, 68, 36, 0.2);
         }
 
         .btn-submit:hover {

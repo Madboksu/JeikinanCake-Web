@@ -81,7 +81,7 @@
                     <?php foreach ($testimonials as $t) : ?>
                         <tr>
                             <td>
-                                <img src="<?= base_url('image/' . $t['testimonial_image']) ?>" alt="<?= esc($t['testimonial_name']) ?>" class="prod-thumb" style="border-radius: 50%;" onerror="this.src='https://via.placeholder.com/50?text=User'">
+                                <img src="<?= base_url('image/' . $t['testimonial_image']) ?>" alt="<?= esc($t['testimonial_name']) ?>" class="prod-thumb" style="border-radius: 50%;" onerror="handleImgError(this, 'User')">
                             </td>
                             <td><strong><?= esc($t['testimonial_name']) ?></strong></td>
                             <td>

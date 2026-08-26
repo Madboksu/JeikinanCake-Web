@@ -29,7 +29,7 @@ class ProductController extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->to(base_url('admin/dashboard#products-section'))
+            return redirect()->to(base_url('admin/dashboard'))
                 ->withInput()->with('error', 'Mohon lengkapi formulir produk dengan benar.');
         }
 
@@ -61,7 +61,7 @@ class ProductController extends BaseController
 
         $this->productModel->insert($data);
 
-        return redirect()->to(base_url('admin/dashboard#products-section'))
+        return redirect()->to(base_url('admin/dashboard'))
             ->with('success', 'Produk berhasil ditambahkan!');
     }
 
@@ -72,7 +72,7 @@ class ProductController extends BaseController
     {
         $product = $this->productModel->find($id);
         if (!$product) {
-            return redirect()->to(base_url('admin/dashboard#products-section'))
+            return redirect()->to(base_url('admin/dashboard'))
                 ->with('error', 'Produk tidak ditemukan.');
         }
 
@@ -102,7 +102,7 @@ class ProductController extends BaseController
 
         $this->productModel->update($id, $data);
 
-        return redirect()->to(base_url('admin/dashboard#products-section'))
+        return redirect()->to(base_url('admin/dashboard'))
             ->with('success', 'Produk berhasil diperbarui!');
     }
 
@@ -113,7 +113,7 @@ class ProductController extends BaseController
     {
         $product = $this->productModel->find($id);
         if (!$product) {
-            return redirect()->to(base_url('admin/dashboard#products-section'))
+            return redirect()->to(base_url('admin/dashboard'))
                 ->with('error', 'Produk tidak ditemukan.');
         }
 
@@ -121,7 +121,7 @@ class ProductController extends BaseController
         $this->productModel->update($id, ['product_is_best_seller' => $newStatus]);
 
         $msg = $newStatus ? 'Produk dijadikan Best Seller di Landing Page.' : 'Produk dihapus dari daftar Best Seller.';
-        return redirect()->to(base_url('admin/dashboard#products-section'))->with('success', $msg);
+        return redirect()->to(base_url('admin/dashboard'))->with('success', $msg);
     }
 
     /**
@@ -132,10 +132,10 @@ class ProductController extends BaseController
         $product = $this->productModel->find($id);
         if ($product) {
             $this->productModel->delete($id);
-            return redirect()->to(base_url('admin/dashboard#products-section'))
+            return redirect()->to(base_url('admin/dashboard'))
                 ->with('success', 'Produk berhasil dihapus.');
         }
-        return redirect()->to(base_url('admin/dashboard#products-section'))
+        return redirect()->to(base_url('admin/dashboard'))
             ->with('error', 'Produk tidak ditemukan.');
     }
 }

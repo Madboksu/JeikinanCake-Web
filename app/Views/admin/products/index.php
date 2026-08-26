@@ -176,7 +176,7 @@
                     <?php foreach ($products as $p) : ?>
                         <tr>
                             <td>
-                                <img src="<?= base_url('image/' . $p['product_image']) ?>" alt="<?= esc($p['product_name']) ?>" class="prod-thumb" onerror="this.src='https://via.placeholder.com/50?text=Cake'">
+                                <img src="<?= base_url('image/' . $p['product_image']) ?>" alt="<?= esc($p['product_name']) ?>" class="prod-thumb" onerror="handleImgError(this, 'Cake')">
                             </td>
                             <td>
                                 <strong><?= esc($p['product_name']) ?></strong>

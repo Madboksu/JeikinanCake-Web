@@ -18,10 +18,10 @@
             --text-body: #3d2c1e;
             --text-muted: #6e7860;
             --border-color: #e2e8f0;
-            --green-primary: #2e7d32;
-            --green-hover: #1e5320;
-            --green-light: #e8f5e9;
-            --green-border: #a5d6a7;
+            --green-primary: #314424;
+            --green-hover: #202d18;
+            --green-light: #edf2ea;
+            --green-border: #a3b899;
             --brown-accent: #4a2c1d;
             --red-accent: #d32f2f;
             --red-light: #ffebee;
@@ -58,7 +58,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.08);
+            box-shadow: 0 4px 15px rgba(49, 68, 36, 0.08);
         }
 
         .cms-brand {
@@ -203,7 +203,7 @@
         .alert-success {
             background-color: var(--green-light);
             border: 1px solid var(--green-border);
-            color: #1b5e20;
+            color: var(--green-primary);
         }
 
         .alert-danger {
@@ -256,7 +256,7 @@
         select:focus {
             outline: none;
             border-color: var(--green-primary);
-            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+            box-shadow: 0 0 0 3px rgba(49, 68, 36, 0.15);
         }
 
         input[type="file"] {
@@ -286,7 +286,7 @@
         .btn-green {
             background-color: var(--green-primary);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+            box-shadow: 0 4px 12px rgba(49, 68, 36, 0.2);
         }
 
         .btn-green:hover {
@@ -472,5 +472,18 @@
         &copy; <?= date('Y') ?> Jeikinan Cake CMS Admin Panel. All Rights Reserved.
     </footer>
 
+    <script>
+        // Prevent infinite image error loop and generate clean local SVG fallback
+        function handleImgError(el, label = 'No Image') {
+            el.onerror = null;
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="#edf2ea"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#314424" font-size="12" font-family="sans-serif">${label}</text></svg>`;
+            el.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+        }
+
+        // Hapus hash fragment (#...) dari address bar browser jika ada
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
+    </script>
 </body>
 </html>
