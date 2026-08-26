@@ -61,4 +61,17 @@ class Pages extends BaseController
 
         return view('product', $data);
     }
+
+    /**
+     * Halaman Keranjang Belanja
+     */
+    public function cart()
+    {
+        $data = [
+            'title' => 'Keranjang Belanja - Jeikinan Cake',
+            'store' => $this->storeModel->getStoreInfo(),
+        ];
+
+        return view('cart', $data);
+    }
 }

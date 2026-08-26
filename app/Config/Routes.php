@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
 // Public Storefront Routes
 $routes->get('/', 'Pages::index');
 $routes->get('/product', 'Pages::product');
+$routes->get('/cart', 'Pages::cart');
 
 // Public Admin Auth Routes
 $routes->get('admin', 'Admin\AuthController::login');

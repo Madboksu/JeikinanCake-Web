@@ -32,8 +32,9 @@
         </ul>
         <div class="nav-right">
             <div class="cart">
-                <a href="<?= base_url('product') ?>" title="Katalog Produk">
+                <a href="<?= base_url('cart') ?>" id="cartIconLink" title="Keranjang Belanja" style="position: relative; display: inline-flex; align-items: center;">
                     <img src="<?= base_url('icon/cart.png'); ?>" alt="cart" width="24" height="24">
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
                 </a>
             </div>
             <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
@@ -105,10 +106,10 @@
                             <p class="price">Rp. <?= number_format($produk['product_price'], 0, ',', '.'); ?> /pcs</p>
                             
                             <div class="card-actions">
-                                <a href="<?= base_url('product?search=' . urlencode($produk['product_name'])); ?>" class="btn-buy" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">Beli Sekarang</a>
-                                <a href="<?= base_url('product'); ?>" class="btn-cart" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;" title="Tambah ke Keranjang">
+                                <button type="button" class="btn-buy" data-id="<?= $produk['product_id'] ?>" data-name="<?= esc($produk['product_name']) ?>" data-price="<?= $produk['product_price'] ?>" data-image="<?= esc($produk['product_image']) ?>">Beli Sekarang</button>
+                                <button type="button" class="btn-cart" data-id="<?= $produk['product_id'] ?>" data-name="<?= esc($produk['product_name']) ?>" data-price="<?= $produk['product_price'] ?>" data-image="<?= esc($produk['product_image']) ?>" title="Tambah ke Keranjang">
                                     <i class="fa-solid fa-cart-shopping"></i>
-                                </a> 
+                                </button> 
                             </div>
                         </div>
                     </div>
@@ -223,7 +224,51 @@
                 <p>&copy; <?= date('Y'); ?> <?= esc($store['store_name'] ?? 'Jeikinan Cake'); ?>. All Rights Reserved.</p>
             </div>
         </div>
-    </footer>
+    <!-- Buy Now Mini Modal -->
+    <div class="cart-modal-overlay" id="buyNowModal">
+        <div class="cart-modal-card mini-buy-now">
+            <button type="button" class="modal-close-btn" onclick="closeBuyNowModal()">&times;</button>
+            <h3 class="mini-modal-title">Pesanan Langsung (Buy Now)</h3>
+
+            <div class="mini-product-summary">
+                <img id="buyNowImg" src="" alt="Product" class="mini-prod-img">
+                <div class="mini-prod-info">
+                    <h4 id="buyNowTitle">Product Name</h4>
+                    <p class="mini-unit-price" id="buyNowUnitVal">Rp. 0</p>
+                </div>
+            </div>
+
+            <div class="mini-qty-row">
+                <span class="label">Jumlah Pesanan:</span>
+                <div class="qty-control">
+                    <button type="button" onclick="changeBuyNowQty(-1)">-</button>
+                    <input type="number" id="buyNowQtyInput" value="1" min="1" readonly>
+                    <button type="button" onclick="changeBuyNowQty(1)">+</button>
+                </div>
+            </div>
+
+            <div class="mini-total-row">
+                <span>Total Pembayaran:</span>
+                <strong id="buyNowTotalVal" class="highlight-price">Rp. 0</strong>
+            </div>
+
+            <div class="summary-form">
+                <div class="form-group">
+                    <label for="buyNowCustomerName">Nama Pemesan <span class="required">*</span></label>
+                    <input type="text" id="buyNowCustomerName" placeholder="Masukkan nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="buyNowNotes">Catatan (Opsional)</label>
+                    <textarea id="buyNowNotes" placeholder="Catatan pesanan..." rows="2"></textarea>
+                </div>
+
+                <button type="button" class="btn-checkout-wa" onclick="submitBuyNowWA()">
+                    <i class="fa-brands fa-whatsapp"></i> Pesan via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         function handleImgError(el, label = 'Cake') {
@@ -231,7 +276,11 @@
             const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="230"><rect width="100%" height="100%" fill="#edf2ea"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#314424" font-size="14" font-family="sans-serif">${label}</text></svg>`;
             el.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
         }
-
+        window.BASE_URL = "<?= base_url('/'); ?>";
+        window.STORE_WA = "<?= esc($store['whatsapp'] ?? '08123456789'); ?>";
+    </script>
+    <script src="<?= base_url('js/cart.js'); ?>"></script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Mobile Navbar Toggle Handler
             const hamburgerBtn = document.getElementById('hamburgerBtn');
