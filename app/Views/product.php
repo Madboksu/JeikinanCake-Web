@@ -159,11 +159,56 @@
         </div>
     </main>
 
-    <!-- Plain Footer (matching home.php, no shadow) -->
-    <footer id="contact">
-        <h2>jenkeinancake.com</h2>
-        <div class="social-media">
-            <span>IG</span> | <span>FB</span> | <span>WA</span>
+    <!-- Footer -->
+    <footer id="contact" class="footer-section">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2 class="footer-logo"><?= esc($store['store_name'] ?? 'Jeikinan Cake'); ?></h2>
+                <p class="footer-tagline">
+                    <?= !empty($store['store_description']) ? esc(mb_substr($store['store_description'], 0, 110)) . '...' : 'Menyajikan kue dan pastry buatan tangan dengan bahan berkualitas tinggi.'; ?>
+                </p>
+            </div>
+
+            <ul class="footer-nav">
+                <li><a href="<?= base_url('/#home') ?>">Home</a></li>
+                <li><a href="<?= base_url('/#about') ?>">About Us</a></li>
+                <li><a href="<?= base_url('product') ?>">Katalog Produk</a></li>
+                <li><a href="<?= base_url('/#review') ?>">Ulasan</a></li>
+                <li><a href="<?= base_url('/#contact') ?>">Kontak</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <?php 
+                    $igVal = $store['instagram'] ?? '';
+                    $igUrl = !empty($igVal) ? (str_starts_with($igVal, 'http') ? $igVal : 'https://instagram.com/' . ltrim($igVal, '@')) : '#';
+
+                    $waVal = $store['whatsapp'] ?? '';
+                    $waNum = preg_replace('/[^0-9]/', '', $waVal);
+                    $waUrl = !empty($waNum) ? 'https://wa.me/' . $waNum : '#';
+
+                    $mapsUrl = !empty($store['address']) ? 'https://maps.google.com/?q=' . urlencode($store['address']) : '#';
+                ?>
+                <?php if (!empty($igVal)) : ?>
+                    <a href="<?= esc($igUrl); ?>" target="_blank" aria-label="Instagram" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                <?php endif; ?>
+                <a href="<?= esc($waUrl); ?>" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <?php if (!empty($store['address'])) : ?>
+                    <a href="<?= esc($mapsUrl); ?>" target="_blank" aria-label="Location" title="<?= esc($store['address']); ?>">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <?= date('Y'); ?> <?= esc($store['store_name'] ?? 'Jeikinan Cake'); ?>. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
