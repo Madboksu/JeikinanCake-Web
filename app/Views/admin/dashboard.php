@@ -297,7 +297,7 @@
                 <div class="form-group full-width" style="display: flex; gap: 20px;">
                     <label style="cursor: pointer;">
                         <input type="checkbox" name="product_is_available" value="1" checked style="width: auto; margin-right: 6px;">
-                        Tersedia (Ready Stock)
+                        Ready Stock (Hilangkan centang jika Pre Order)
                     </label>
                     <label style="cursor: pointer;">
                         <input type="checkbox" name="product_is_best_seller" value="1" style="width: auto; margin-right: 6px;">
@@ -354,7 +354,7 @@
                 <div class="form-group full-width" style="display: flex; gap: 20px;">
                     <label style="cursor: pointer;">
                         <input type="checkbox" id="edit_p_avail" name="product_is_available" value="1" style="width: auto; margin-right: 6px;">
-                        Tersedia (Ready Stock)
+                        Ready Stock (Hilangkan centang jika Pre Order)
                     </label>
                     <label style="cursor: pointer;">
                         <input type="checkbox" id="edit_p_best" name="product_is_best_seller" value="1" style="width: auto; margin-right: 6px;">
@@ -400,9 +400,9 @@
                             <td>Rp <?= number_format($p['product_price'], 0, ',', '.') ?></td>
                             <td>
                                 <?php if ($p['product_is_available']) : ?>
-                                    <span class="badge badge-green">Tersedia</span>
+                                    <span class="badge badge-green">Ready Stock</span>
                                 <?php else : ?>
-                                    <span class="badge badge-gray">Habis</span>
+                                    <span class="badge badge-gray" style="background: #fff3ed; color: #ea580c; border: 1px solid #ffedd5;">Pre Order</span>
                                 <?php endif; ?>
                             </td>
                             <td>

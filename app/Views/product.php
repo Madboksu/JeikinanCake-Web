@@ -22,11 +22,11 @@
             <?php endif; ?>
         </div>
         <ul class="menu" id="navMenu">
-            <li><a href="<?= base_url('/#home') ?>">Home</a></li>
-            <li><a href="<?= base_url('/#about') ?>">About</a></li>
-            <li><a href="<?= base_url('product') ?>">Product</a></li>
-            <li><a href="<?= base_url('/#review') ?>">Review</a></li>
-            <li><a href="<?= base_url('/#contact') ?>">Contact</a></li>
+            <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
+            <li><a href="<?= base_url('/#about') ?>">Tentang Kami</a></li>
+            <li><a href="<?= base_url('product') ?>">Produk</a></li>
+            <li><a href="<?= base_url('/#review') ?>">Ulasan</a></li>
+            <li><a href="<?= base_url('/#contact') ?>">Kontak</a></li>
         </ul>
         <div class="nav-right">
             <div class="cart">
@@ -46,7 +46,7 @@
         <!-- Title & Search Bar Row -->
         <div class="catalog-header">
             <div class="catalog-title">
-                <h1>What We Serve</h1>
+                <h1>Produk Kami</h1>
             </div>
             <div class="catalog-search">
                 <form action="<?= base_url('product') ?>" method="GET" class="catalog-search-form">
@@ -56,7 +56,7 @@
                     <?php if (!empty($selectedSort)) : ?>
                         <input type="hidden" name="sort" value="<?= esc($selectedSort) ?>">
                     <?php endif; ?>
-                    <input type="text" name="search" placeholder="Search" value="<?= esc($keyword ?? '') ?>">
+                    <input type="text" name="search" placeholder="Cari produk..." value="<?= esc($keyword ?? '') ?>">
                     <button type="submit" aria-label="Search">
                         <i class="fa-solid fa-magnifying-glass" style="font-size: 16px;"></i>
                     </button>
@@ -78,7 +78,7 @@
             <aside class="catalog-sidebar">
                 <!-- Sorted By Card -->
                 <div class="filter-card">
-                    <h4>Sorted By</h4>
+                    <h4>Urutkan Berdasarkan</h4>
                     <ul class="filter-list">
                         <?php
                         function buildFilterUrl($paramType, $paramVal, $selectedCat, $selectedSort, $keyword) {
@@ -96,7 +96,7 @@
                         <li>
                             <a href="<?= buildFilterUrl('sort', 'available', $selectedCat, $selectedSort, $keyword) ?>"
                                class="<?= ($selectedSort === 'available') ? 'active' : '' ?>">
-                                Available Product
+                                Produk Tersedia
                             </a>
                         </li>
                         <li>
@@ -114,7 +114,7 @@
                         <li>
                             <a href="<?= buildFilterUrl('sort', 'recommended', $selectedCat, $selectedSort, $keyword) ?>"
                                class="<?= ($selectedSort === 'recommended') ? 'active' : '' ?>">
-                                Recommended
+                                Rekomendasi
                             </a>
                         </li>
                     </ul>
@@ -122,12 +122,12 @@
 
                 <!-- Category Card -->
                 <div class="filter-card">
-                    <h4>Category</h4>
+                    <h4>Kategori</h4>
                     <ul class="filter-list">
                         <li>
                             <a href="<?= buildFilterUrl('category', null, $selectedCat, $selectedSort, $keyword) ?>"
                                class="<?= (empty($selectedCat)) ? 'active' : '' ?>">
-                                All
+                                Semua Kategori
                             </a>
                         </li>
                         <?php if (!empty($categories)) : ?>
@@ -149,8 +149,16 @@
                 <?php if (!empty($products)) : ?>
                     <div class="catalog-grid">
                         <?php foreach ($products as $p) : ?>
+                            <?php 
+                                $isBest = !empty($p['product_is_best_seller']); 
+                                $isAvail = isset($p['product_is_available']) ? (int)$p['product_is_available'] : 1;
+                                $buyBtnText = $isAvail ? 'Beli Sekarang' : 'PO';
+                            ?>
                             <div class="catalog-card product-card">
                                 <div class="image-wrapper">
+                                    <?php if ($isBest) : ?>
+                                        <span class="badge-best-seller"><i class="fa-solid fa-crown"></i> Best Seller</span>
+                                    <?php endif; ?>
                                     <img src="<?= base_url('image/' . $p['product_image']) ?>"
                                          alt="<?= esc($p['product_name']) ?>"
                                          onerror="handleImgError(this, '<?= esc($p['product_name']) ?>')">
@@ -159,7 +167,7 @@
                                     <h3><?= esc($p['product_name']) ?></h3>
                                     <p class="price">Rp. <?= number_format($p['product_price'], 0, ',', '.') ?> /pcs</p>
                                     <div class="card-actions">
-                                        <button type="button" class="btn-buy" data-id="<?= $p['product_id'] ?>" data-name="<?= esc($p['product_name']) ?>" data-price="<?= $p['product_price'] ?>" data-image="<?= esc($p['product_image']) ?>">Beli Sekarang</button>
+                                        <button type="button" class="btn-buy" data-id="<?= $p['product_id'] ?>" data-name="<?= esc($p['product_name']) ?>" data-price="<?= $p['product_price'] ?>" data-image="<?= esc($p['product_image']) ?>"><?= $buyBtnText; ?></button>
                                         <button type="button" class="btn-cart" data-id="<?= $p['product_id'] ?>" data-name="<?= esc($p['product_name']) ?>" data-price="<?= $p['product_price'] ?>" data-image="<?= esc($p['product_image']) ?>" title="Tambah ke Keranjang">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </button>
@@ -194,8 +202,8 @@
             </div>
 
             <ul class="footer-nav">
-                <li><a href="<?= base_url('/#home') ?>">Home</a></li>
-                <li><a href="<?= base_url('/#about') ?>">About Us</a></li>
+                <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
+                <li><a href="<?= base_url('/#about') ?>">Tentang Kami</a></li>
                 <li><a href="<?= base_url('product') ?>">Katalog Produk</a></li>
                 <li><a href="<?= base_url('/#review') ?>">Ulasan</a></li>
                 <li><a href="<?= base_url('/#contact') ?>">Kontak</a></li>
@@ -219,9 +227,6 @@
                 <?php endif; ?>
                 <a href="<?= esc($waUrl); ?>" target="_blank" aria-label="WhatsApp" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
                 </a>
                 <?php if (!empty($store['address'])) : ?>
                     <a href="<?= esc($mapsUrl); ?>" target="_blank" aria-label="Location" title="<?= esc($store['address']); ?>">
@@ -288,7 +293,7 @@
             el.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
         }
         window.BASE_URL = "<?= base_url('/'); ?>";
-        window.STORE_WA = "<?= esc($store['whatsapp'] ?? '08123456789'); ?>";
+        window.STORE_WA = "<?= esc($store['whatsapp'] ?? '6285816261843'); ?>";
     </script>
     <script src="<?= base_url('js/cart.js'); ?>"></script>
     <script>

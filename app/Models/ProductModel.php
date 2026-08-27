@@ -29,16 +29,31 @@ class ProductModel extends Model
     protected $updatedField  = 'updated_at';
 
     /**
-     * Get best seller products for homepage section
+     * Get best seller products for homepage section (always returns up to 3 items)
      */
     public function getBestSellers(int $limit = 3)
     {
-        return $this->select('product.*, category.category_name')
-                    ->join('category', 'category.category_id = product.category_id', 'left')
-                    ->where('product_is_best_seller', 1)
-                    ->where('product_is_available', 1)
-                    ->orderBy('product.product_id', 'DESC')
-                    ->findAll($limit);
+        $best = $this->select('product.*, category.category_name')
+                     ->join('category', 'category.category_id = product.category_id', 'left')
+                     ->where('product_is_best_seller', 1)
+                     ->orderBy('product.product_id', 'DESC')
+                     ->findAll($limit);
+
+        $count = count($best);
+        if ($count < $limit) {
+            $existingIds = array_column($best, 'product_id');
+            $needed = $limit - $count;
+
+            $builder = $this->select('product.*, category.category_name')
+                            ->join('category', 'category.category_id = product.category_id', 'left');
+            if (!empty($existingIds)) {
+                $builder->whereNotIn('product.product_id', $existingIds);
+            }
+            $fill = $builder->orderBy('product.product_id', 'DESC')->findAll($needed);
+            $best = array_merge($best, $fill);
+        }
+
+        return $best;
     }
 
     /**

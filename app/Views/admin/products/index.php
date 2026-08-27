@@ -188,9 +188,9 @@
                             <td>Rp <?= number_format($p['product_price'], 0, ',', '.') ?></td>
                             <td>
                                 <?php if ($p['product_is_available']) : ?>
-                                    <span class="badge badge-success">Tersedia</span>
+                                    <span class="badge badge-success">Ready Stock</span>
                                 <?php else : ?>
-                                    <span class="badge badge-secondary">Habis</span>
+                                    <span class="badge badge-secondary" style="background: rgba(234, 88, 12, 0.2); color: #ea580c; border: 1px solid #ea580c;">Pre Order</span>
                                 <?php endif; ?>
                             </td>
                             <td>

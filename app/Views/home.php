@@ -24,11 +24,11 @@
             <?php endif; ?>
         </div>
         <ul class="menu" id="navMenu">
-            <li><a href="<?= base_url('/#home') ?>">Home</a></li>
-            <li><a href="<?= base_url('/#about') ?>">About</a></li>
-            <li><a href="<?= base_url('product') ?>">Product</a></li> 
-            <li><a href="<?= base_url('/#review') ?>">Review</a></li>
-            <li><a href="<?= base_url('/#contact') ?>">Contact</a></li>
+            <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
+            <li><a href="<?= base_url('/#about') ?>">Tentang Kami</a></li>
+            <li><a href="<?= base_url('product') ?>">Produk</a></li> 
+            <li><a href="<?= base_url('/#review') ?>">Ulasan</a></li>
+            <li><a href="<?= base_url('/#contact') ?>">Kontak</a></li>
         </ul>
         <div class="nav-right">
             <div class="cart">
@@ -56,7 +56,7 @@
 
             <div class="search-bar-wrapper">
                 <form action="<?= base_url('product') ?>" method="GET" class="search-bar">
-                    <input type="text" name="search" placeholder="Search">
+                    <input type="text" name="search" placeholder="Cari produk...">
                     <button type="submit" aria-label="Search">
                         <i class="fa-solid fa-magnifying-glass" style="font-size: 16px;"></i>
                     </button>
@@ -68,10 +68,10 @@
         <section id="about">
             <div class="about-image">
                 <?php $aboutImg = !empty($store['store_image']) ? $store['store_image'] : 'donat.png'; ?>
-                <img src="<?= base_url('image/' . esc($aboutImg)); ?>" alt="<?= esc($store['store_name'] ?? 'About Us'); ?>" onerror="this.onerror=null;this.src='<?= base_url('image/donat.png'); ?>';">
+                <img src="<?= base_url('image/' . esc($aboutImg)); ?>" alt="<?= esc($store['store_name'] ?? 'Tentang Kami'); ?>" onerror="this.onerror=null;this.src='<?= base_url('image/donat.png'); ?>';">
             </div>
             <div class="about-text">
-                <h2>About Us</h2>
+                <h2>Tentang Kami</h2>
                 <?php if (!empty($store['store_description'])) : ?>
                     <p><?= nl2br(esc($store['store_description'])); ?></p>
                 <?php else : ?>
@@ -89,14 +89,19 @@
         <!-- 4. SECTION BEST SELLERS -->
         <section id="best-sellers" class="best-sellers-section">
             <div class="section-header">
-                <h2>Best Sellers</h2>
+                <h2>Produk Terlaris</h2>
             </div>
             
             <div class="product-grid">
                 <?php if (!empty($best_sellers)) : ?>
                     <?php foreach ($best_sellers as $produk) : ?>
+                    <?php 
+                        $isAvail = isset($produk['product_is_available']) ? (int)$produk['product_is_available'] : 1;
+                        $buyBtnText = $isAvail ? 'Beli Sekarang' : 'Pesan Sekarang';
+                    ?>
                     <div class="catalog-card product-card">
                         <div class="image-wrapper">
+                            <span class="badge-best-seller"><i class="fa-solid fa-crown"></i> Best Seller</span>
                             <img src="<?= base_url('image/' . esc($produk['product_image'])); ?>" 
                                  alt="<?= esc($produk['product_name']); ?>"
                                  onerror="handleImgError(this, '<?= esc($produk['product_name']); ?>')">
@@ -106,7 +111,7 @@
                             <p class="price">Rp. <?= number_format($produk['product_price'], 0, ',', '.'); ?> /pcs</p>
                             
                             <div class="card-actions">
-                                <button type="button" class="btn-buy" data-id="<?= $produk['product_id'] ?>" data-name="<?= esc($produk['product_name']) ?>" data-price="<?= $produk['product_price'] ?>" data-image="<?= esc($produk['product_image']) ?>">Beli Sekarang</button>
+                                <button type="button" class="btn-buy" data-id="<?= $produk['product_id'] ?>" data-name="<?= esc($produk['product_name']) ?>" data-price="<?= $produk['product_price'] ?>" data-image="<?= esc($produk['product_image']) ?>"><?= $buyBtnText; ?></button>
                                 <button type="button" class="btn-cart" data-id="<?= $produk['product_id'] ?>" data-name="<?= esc($produk['product_name']) ?>" data-price="<?= $produk['product_price'] ?>" data-image="<?= esc($produk['product_image']) ?>" title="Tambah ke Keranjang">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </button> 
@@ -115,20 +120,20 @@
                     </div>
                     <?php endforeach; ?>
                 <?php else : ?>
-                    <p style="text-align: center; width: 100%; color: #ffffff;">Belum ada produk best seller saat ini.</p>
+                    <p style="text-align: center; width: 100%; color: #ffffff;">Belum ada produk terlaris saat ini.</p>
                 <?php endif; ?>
             </div>
 
             <div class="section-footer">
                 <a href="<?= base_url('product'); ?>" class="view-all">
-                    View all <i class="fa-solid fa-chevron-right" style="font-size: 13px;"></i>
+                    Lihat Semua <i class="fa-solid fa-chevron-right" style="font-size: 13px;"></i>
                 </a>
             </div>
         </section>
 
         <!-- 5. SECTION REVIEW -->
         <section id="review" class="review-section">
-            <h2>What They Said</h2>
+            <h2>Apa Kata Mereka</h2>
 
             <div class="testimonial-container">
                 <div class="testimonial-grid" id="testimonialSlider">
@@ -184,8 +189,8 @@
             </div>
 
             <ul class="footer-nav">
-                <li><a href="<?= base_url('/#home') ?>">Home</a></li>
-                <li><a href="<?= base_url('/#about') ?>">About Us</a></li>
+                <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
+                <li><a href="<?= base_url('/#about') ?>">Tentang Kami</a></li>
                 <li><a href="<?= base_url('product') ?>">Katalog Produk</a></li>
                 <li><a href="<?= base_url('/#review') ?>">Ulasan</a></li>
                 <li><a href="<?= base_url('/#contact') ?>">Kontak</a></li>
@@ -209,9 +214,6 @@
                 <?php endif; ?>
                 <a href="<?= esc($waUrl); ?>" target="_blank" aria-label="WhatsApp" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
                 </a>
                 <?php if (!empty($store['address'])) : ?>
                     <a href="<?= esc($mapsUrl); ?>" target="_blank" aria-label="Location" title="<?= esc($store['address']); ?>">
@@ -277,7 +279,7 @@
             el.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
         }
         window.BASE_URL = "<?= base_url('/'); ?>";
-        window.STORE_WA = "<?= esc($store['whatsapp'] ?? '08123456789'); ?>";
+        window.STORE_WA = "<?= esc($store['whatsapp'] ?? '6285816261843'); ?>";
     </script>
     <script src="<?= base_url('js/cart.js'); ?>"></script>
     <script>

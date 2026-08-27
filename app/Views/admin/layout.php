@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? 'CMS Kelola Website - Jeikinan Cake') ?></title>
+    <title><?= esc($title ?? ($store['store_name'] ?? "JEN-KEINAN'S CAKE")) ?></title>
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -417,7 +417,7 @@
             <div class="cms-brand-icon">
                 <i class="fa-solid fa-cake-candles"></i>
             </div>
-            <span class="cms-brand-title">Jeikinan CMS</span>
+            <span class="cms-brand-title"><?= esc($store['store_name'] ?? "JEN-KEINAN'S CAKE") ?></span>
         </a>
 
         <ul class="cms-nav-links">
@@ -444,7 +444,7 @@
                 <?= esc(session()->get('admin_username') ?? 'Admin') ?>
             </span>
             <a href="<?= base_url('admin/logout') ?>" class="btn-logout">
-                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                <i class="fa-solid fa-right-from-bracket"></i> Keluar
             </a>
         </div>
     </nav>
@@ -469,7 +469,7 @@
     </div>
 
     <footer class="cms-footer">
-        &copy; <?= date('Y') ?> Jeikinan Cake CMS Admin Panel. All Rights Reserved.
+        &copy; <?= date('Y') ?> Jeikinan Cake Panel Admin CMS. Hak Cipta Dilindungi.
     </footer>
 
     <script>

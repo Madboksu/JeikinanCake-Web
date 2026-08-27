@@ -48,6 +48,15 @@ class ProductController extends BaseController
             $imageFile->move($uploadPath, $imageName);
         }
 
+        $isBestSeller = $this->request->getPost('product_is_best_seller') ? 1 : 0;
+        if ($isBestSeller) {
+            $currentBestCount = $this->productModel->where('product_is_best_seller', 1)->countAllResults();
+            if ($currentBestCount >= 3) {
+                return redirect()->to(base_url('admin/dashboard'))
+                    ->withInput()->with('error', 'Maksimal hanya 3 produk yang dapat dijadikan Best Seller!');
+            }
+        }
+
         $data = [
             'product_name'           => $name,
             'product_slug'           => $slug,
@@ -56,7 +65,7 @@ class ProductController extends BaseController
             'product_desc'           => $this->request->getPost('product_desc'),
             'product_image'          => $imageName,
             'product_is_available'   => $this->request->getPost('product_is_available') ? 1 : 0,
-            'product_is_best_seller' => $this->request->getPost('product_is_best_seller') ? 1 : 0,
+            'product_is_best_seller' => $isBestSeller,
         ];
 
         $this->productModel->insert($data);
@@ -79,6 +88,15 @@ class ProductController extends BaseController
         $name = $this->request->getPost('product_name');
         $slug = url_title($name, '-', true);
 
+        $isBestSeller = $this->request->getPost('product_is_best_seller') ? 1 : 0;
+        if ($isBestSeller && !$product['product_is_best_seller']) {
+            $currentBestCount = $this->productModel->where('product_is_best_seller', 1)->countAllResults();
+            if ($currentBestCount >= 3) {
+                return redirect()->to(base_url('admin/dashboard'))
+                    ->withInput()->with('error', 'Maksimal hanya 3 produk yang dapat dijadikan Best Seller!');
+            }
+        }
+
         $data = [
             'product_name'           => $name,
             'product_slug'           => $slug,
@@ -86,7 +104,7 @@ class ProductController extends BaseController
             'category_id'            => $this->request->getPost('category_id'),
             'product_desc'           => $this->request->getPost('product_desc'),
             'product_is_available'   => $this->request->getPost('product_is_available') ? 1 : 0,
-            'product_is_best_seller' => $this->request->getPost('product_is_best_seller') ? 1 : 0,
+            'product_is_best_seller' => $isBestSeller,
         ];
 
         $imageFile = $this->request->getFile('product_image_file');
@@ -118,6 +136,15 @@ class ProductController extends BaseController
         }
 
         $newStatus = $product['product_is_best_seller'] ? 0 : 1;
+
+        if ($newStatus == 1) {
+            $currentBestCount = $this->productModel->where('product_is_best_seller', 1)->countAllResults();
+            if ($currentBestCount >= 3) {
+                return redirect()->to(base_url('admin/dashboard'))
+                    ->with('error', 'Maksimal hanya 3 produk yang dapat dijadikan Best Seller!');
+            }
+        }
+
         $this->productModel->update($id, ['product_is_best_seller' => $newStatus]);
 
         $msg = $newStatus ? 'Produk dijadikan Best Seller di Landing Page.' : 'Produk dihapus dari daftar Best Seller.';
