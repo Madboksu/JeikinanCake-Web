@@ -25,11 +25,11 @@
             <?php endif; ?>
         </div>
         <ul class="menu" id="navMenu">
-            <li><a href="<?= base_url('/#home') ?>">Home</a></li>
-            <li><a href="<?= base_url('/#about') ?>">About</a></li>
-            <li><a href="<?= base_url('product') ?>">Product</a></li> 
-            <li><a href="<?= base_url('/#review') ?>">Review</a></li>
-            <li><a href="<?= base_url('/#contact') ?>">Contact</a></li>
+            <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
+            <li><a href="<?= base_url('/#about') ?>">Tentang Kami</a></li>
+            <li><a href="<?= base_url('product') ?>">Produk</a></li> 
+            <li><a href="<?= base_url('/#review') ?>">Ulasan</a></li>
+            <li><a href="<?= base_url('/#contact') ?>">Kontak</a></li>
         </ul>
         <div class="nav-right">
             <div class="cart">
@@ -49,7 +49,7 @@
         <div class="cart-wrapper">
             <!-- Header Title Matching Mockup -->
             <div class="cart-header-row">
-                <h1 class="cart-main-title">Your Cart</h1>
+                <h1 class="cart-main-title">Keranjang Belanja Anda</h1>
             </div>
 
             <!-- Two-Column Layout Grid -->
@@ -62,7 +62,7 @@
                 <!-- Right Column: Order Summary Card -->
                 <div class="cart-summary-column">
                     <div class="summary-card">
-                        <h3>Order Summary</h3>
+                        <h3>Ringkasan Pesanan</h3>
                         
                         <div class="summary-row">
                             <span>Total Item</span>
@@ -108,8 +108,8 @@
             </div>
 
             <ul class="footer-nav">
-                <li><a href="<?= base_url('/#home') ?>">Home</a></li>
-                <li><a href="<?= base_url('/#about') ?>">About Us</a></li>
+                <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
+                <li><a href="<?= base_url('/#about') ?>">Tentang Kami</a></li>
                 <li><a href="<?= base_url('product') ?>">Katalog Produk</a></li>
                 <li><a href="<?= base_url('/#review') ?>">Ulasan</a></li>
                 <li><a href="<?= base_url('/#contact') ?>">Kontak</a></li>
@@ -133,9 +133,6 @@
                 <?php endif; ?>
                 <a href="<?= esc($waUrl); ?>" target="_blank" aria-label="WhatsApp" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
                 </a>
                 <?php if (!empty($store['address'])) : ?>
                     <a href="<?= esc($mapsUrl); ?>" target="_blank" aria-label="Location" title="<?= esc($store['address']); ?>">
@@ -190,7 +187,7 @@
             el.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
         }
         window.BASE_URL = "<?= base_url('/'); ?>";
-        window.STORE_WA = "<?= esc($store['whatsapp'] ?? '08123456789'); ?>";
+        window.STORE_WA = "<?= esc($store['whatsapp'] ?? '6285816261843'); ?>";
     </script>
     <script src="<?= base_url('js/cart.js'); ?>"></script>
     <script>

@@ -17,7 +17,7 @@ class StoreInformationSeeder extends Seeder
             'store_image'       => 'store_front.jpg',
             'hero_image'        => 'hero_banner.jpg',
             'address'           => 'Jl. Raya Surabaya No. 123, Jawa Timur, Indonesia',
-            'whatsapp'          => '6281234567890',
+            'whatsapp'          => '6285816261843',
             'instagram'         => '@jeikinancake',
             'opening_hours'     => 'Senin - Minggu (08.00 - 21.00 WIB)',
             'created_at'        => $now,

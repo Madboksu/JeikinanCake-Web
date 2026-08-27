@@ -123,6 +123,8 @@ const CartManager = {
         const items = this.getItems();
         const baseUrl = window.BASE_URL || '/';
 
+        const summaryCol = document.querySelector('.cart-summary-column');
+
         if (items.length === 0) {
             container.innerHTML = `
                 <div class="empty-cart-state">
@@ -133,10 +135,13 @@ const CartManager = {
                 </div>
             `;
 
+            if (summaryCol) summaryCol.style.display = 'none';
             if (summaryTotalItems) summaryTotalItems.textContent = '0 Item';
             if (summaryTotalPrice) summaryTotalPrice.textContent = 'Rp. 0';
             return;
         }
+
+        if (summaryCol) summaryCol.style.display = '';
 
         let html = '';
         items.forEach(item => {
@@ -159,12 +164,12 @@ const CartManager = {
 
                         <div class="item-detail-col">
                             <div class="detail-group">
-                                <span class="detail-label">each</span>
+                                <span class="detail-label">Satuan</span>
                                 <span class="detail-val">Rp. ${this.formatPrice(item.price)}</span>
                             </div>
 
                             <div class="detail-group">
-                                <span class="detail-label">Quanty</span>
+                                <span class="detail-label">Jumlah</span>
                                 <div class="qty-control">
                                     <button type="button" onclick="CartManager.updateQuantity('${item.id}', ${item.quantity - 1})" aria-label="Kurangi">-</button>
                                     <input type="number" value="${item.quantity}" min="1" onchange="CartManager.updateQuantity('${item.id}', parseInt(this.value) || 1)">
@@ -173,7 +178,7 @@ const CartManager = {
                             </div>
 
                             <div class="detail-group">
-                                <span class="detail-label">Total</span>
+                                <span class="detail-label">Subtotal</span>
                                 <span class="detail-val total-val">Rp. ${this.formatPrice(itemTotal)}</span>
                             </div>
                         </div>
