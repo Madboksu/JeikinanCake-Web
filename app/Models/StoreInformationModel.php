@@ -13,6 +13,7 @@ class StoreInformationModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'store_name',
+        'header_title',
         'store_logo',
         'store_description',
         'store_image',

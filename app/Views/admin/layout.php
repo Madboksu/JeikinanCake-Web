@@ -422,18 +422,28 @@
 
         <ul class="cms-nav-links">
             <li>
+                <a href="#header-section">
+                    <i class="fa-solid fa-window-maximize"></i> Header Web
+                </a>
+            </li>
+            <li>
+                <a href="#banner-section">
+                    <i class="fa-solid fa-image"></i> Banner Hero
+                </a>
+            </li>
+            <li>
                 <a href="#store-section">
-                    <i class="fa-solid fa-sliders"></i> Teks & Landing Page
+                    <i class="fa-solid fa-store"></i> Info Toko
                 </a>
             </li>
             <li>
                 <a href="#testimonials-section">
-                    <i class="fa-solid fa-comments"></i> Kelola Testimoni
+                    <i class="fa-solid fa-comments"></i> Testimoni
                 </a>
             </li>
             <li>
                 <a href="#products-section">
-                    <i class="fa-solid fa-utensils"></i> Kelola Produk
+                    <i class="fa-solid fa-utensils"></i> Produk
                 </a>
             </li>
         </ul>

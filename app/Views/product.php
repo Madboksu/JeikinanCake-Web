@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? "Product - Jeikinan's Cake") ?></title>
+    <title><?= esc(!empty($store['header_title']) ? $store['header_title'] . ' - Produk' : "Produk - " . ($store['store_name'] ?? 'Jeikinan Cake')) ?></title>
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,11 +15,9 @@
     <!-- Top Navigation Bar (Identical to Landing Page) -->
     <nav>
         <div class="logo">
-            <?php if (!empty($store['store_name'])) : ?>
-                <?= esc($store['store_name']) ?>
-            <?php else : ?>
-                JEN-<br>KEINAN'S<br>CAKE
-            <?php endif; ?>
+            <a href="<?= base_url('/') ?>" class="nav-brand-link">
+                <?= esc($store['store_name'] ?? 'Jeikinan Cake') ?>
+            </a>
         </div>
         <ul class="menu" id="navMenu">
             <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
@@ -152,7 +150,7 @@
                             <?php 
                                 $isBest = !empty($p['product_is_best_seller']); 
                                 $isAvail = isset($p['product_is_available']) ? (int)$p['product_is_available'] : 1;
-                                $buyBtnText = $isAvail ? 'Beli Sekarang' : 'PO';
+                                $buyBtnText = $isAvail ? 'Beli Sekarang' : 'Pre Order';
                             ?>
                             <div class="catalog-card product-card">
                                 <div class="image-wrapper">

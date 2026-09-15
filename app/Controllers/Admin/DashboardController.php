@@ -51,6 +51,7 @@ class DashboardController extends BaseController
 
         $updateData = [
             'store_name'        => $this->request->getPost('store_name'),
+            'header_title'      => $this->request->getPost('header_title'),
             'store_description' => $this->request->getPost('store_description'),
             'address'           => $this->request->getPost('address'),
             'whatsapp'          => $this->request->getPost('whatsapp'),

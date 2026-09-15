@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? 'Keranjang Belanja - Jeikinan Cake'); ?></title>
+    <title><?= esc(!empty($store['header_title']) ? $store['header_title'] . ' - Keranjang Belanja' : ($store['store_name'] ?? 'Jeikinan Cake') . ' - Keranjang Belanja'); ?></title>
     <style>
         html {scroll-behavior: smooth;}
     </style>
@@ -18,11 +18,9 @@
     <!-- Top Navigation Bar -->
     <nav>
         <div class="logo">
-            <?php if (!empty($store['store_name'])) : ?>
-                <?= esc($store['store_name']) ?>
-            <?php else : ?>
-                JEN-<br>KEINAN'S<br>CAKE
-            <?php endif; ?>
+            <a href="<?= base_url('/') ?>" class="nav-brand-link">
+                <?= esc($store['store_name'] ?? 'Jeikinan Cake') ?>
+            </a>
         </div>
         <ul class="menu" id="navMenu">
             <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>

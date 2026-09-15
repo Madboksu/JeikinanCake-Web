@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? ($store['store_name'] ?? 'Jeikinan Cake')); ?></title>
+    <title><?= esc($store['header_title'] ?? $store['store_name'] ?? 'Jeikinan Cake'); ?></title>
     <style>
         html {scroll-behavior: smooth;}
     </style>
@@ -17,11 +17,9 @@
 <body>
     <nav>
         <div class="logo">
-            <?php if (!empty($store['store_name'])) : ?>
-                <?= esc($store['store_name']) ?>
-            <?php else : ?>
-                JEN-<br>KEINAN'S<br>CAKE
-            <?php endif; ?>
+            <a href="<?= base_url('/') ?>" class="nav-brand-link">
+                <?= esc($store['store_name'] ?? 'Jeikinan Cake') ?>
+            </a>
         </div>
         <ul class="menu" id="navMenu">
             <li><a href="<?= base_url('/#home') ?>">Beranda</a></li>
@@ -47,20 +45,31 @@
     <main>
         <!-- 2. SECTION HOME -->
         <section id="home">
-            <div class="hero">
+            <div class="hero-banner-wrapper">
                 <?php 
-                    $heroImage = !empty($store['hero_image']) ? $store['hero_image'] : (!empty($store['store_logo']) ? $store['store_logo'] : 'logo.png');
+                    $heroImage = !empty($store['hero_image']) ? $store['hero_image'] : 'bg-home.png';
                 ?>
-                <img src="<?= base_url('image/' . esc($heroImage)); ?>" alt="<?= esc($store['store_name'] ?? 'Jeikinan Cake'); ?>" onerror="this.onerror=null;this.src='<?= base_url('image/logo.png'); ?>';">
+                <img src="<?= base_url('image/' . esc($heroImage)); ?>" alt="<?= esc($store['store_name'] ?? 'Jeikinan Cake'); ?>" class="hero-banner-img" onerror="this.onerror=null;this.src='<?= base_url('image/bg-home.png'); ?>';">
+                <div class="hero-banner-overlay"></div>
             </div>
 
-            <div class="search-bar-wrapper">
-                <form action="<?= base_url('product') ?>" method="GET" class="search-bar">
-                    <input type="text" name="search" placeholder="Cari produk...">
-                    <button type="submit" aria-label="Search">
-                        <i class="fa-solid fa-magnifying-glass" style="font-size: 16px;"></i>
-                    </button>
-                </form>
+            <!-- Konten Tengah: Logo Toko & Kolom Pencarian -->
+            <div class="hero-content">
+                <div class="hero-center-logo">
+                    <?php 
+                        $centerLogo = !empty($store['store_logo']) ? $store['store_logo'] : 'logo.png';
+                    ?>
+                    <img src="<?= base_url('image/' . esc($centerLogo)); ?>" alt="<?= esc($store['store_name'] ?? 'Logo'); ?>" onerror="this.onerror=null;this.src='<?= base_url('image/logo.png'); ?>';">
+                </div>
+
+                <div class="search-bar-wrapper">
+                    <form action="<?= base_url('product') ?>" method="GET" class="search-bar">
+                        <input type="text" name="search" placeholder="Cari produk...">
+                        <button type="submit" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass" style="font-size: 16px;"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
 

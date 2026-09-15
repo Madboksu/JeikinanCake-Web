@@ -27,13 +27,25 @@ nav {
 nav .logo {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
+}
 
-    font-size: 18px;
-    font-weight: 700;
+nav .logo .nav-brand-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 800;
     color: #2E3C18;
     line-height: 1.1;
     letter-spacing: 0.5px;
     font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+nav .logo .nav-brand-link:hover {
+    color: #314424;
+    opacity: 0.85;
 }
 
 nav .menu {
@@ -89,37 +101,82 @@ nav .cart {
 
 
 #home {
-    background-image: url(../image/bg-home.png);
-    background-size: cover;
-    background-position: center;
-
     position: relative;
     min-height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 35px;
-    padding: 60px 4% 50px;
+    padding: 70px 4% 60px;
     box-sizing: border-box;
+    overflow: hidden;
+    background-color: #2E3C18;
 }
 
-#home .hero {
-    margin: 0;
-    text-align: center;
+.hero-banner-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
-#home .hero img {
-    width: 600px;
-    max-width: 90%;
+.hero-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.hero-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.62) 100%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+    max-width: 1100px;
+    margin: auto 0;
+}
+
+.hero-center-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-center-logo img {
+    max-width: 480px;
+    max-height: 190px;
+    width: 90%;
     height: auto;
-    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.10));
+    object-fit: contain;
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.55));
     transition: transform 0.3s ease;
 }
 
-#home .hero img:hover {
-    transform: scale(1.05);
+.hero-center-logo img:hover {
+    transform: scale(1.03);
+}
+
+/* Backward compatibility */
+#home .hero {
+    display: none;
 }
 
 .search-bar-wrapper {
@@ -783,6 +840,21 @@ footer#contact .social-media span:hover {
 
     nav .menu li:last-child a {
         border-bottom: none;
+    }
+
+    /* Hero Section Mobile */
+    #home {
+        min-height: 60vh;
+        padding: 50px 5% 40px;
+    }
+
+    .hero-content {
+        gap: 22px;
+    }
+
+    .hero-center-logo img {
+        max-width: 280px;
+        max-height: 120px;
     }
 
     /* About Us Mobile: Gambar atas, Teks bawah */

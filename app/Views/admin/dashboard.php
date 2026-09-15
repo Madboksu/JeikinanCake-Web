@@ -2,96 +2,155 @@
 
 <?= $this->section('content') ?>
 
-<!-- SECTION 1: TEKS & GAMBAR LANDING PAGE -->
-<div id="store-section" class="card">
-    <div class="card-header">
-        <h2 class="card-title">
-            <i class="fa-solid fa-pen-to-square"></i>
-            Pengaturan Teks & Gambar Landing Page
-        </h2>
-    </div>
-
     <form action="<?= base_url('admin/store/update') ?>" method="POST" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
-        <div class="form-grid">
-            <div class="form-group full-width">
-                <label for="store_name">Nama Toko / Brand</label>
-                <input type="text" id="store_name" name="store_name" value="<?= esc($store['store_name'] ?? 'Jeikinan Cake') ?>" required>
+        <!-- SECTION 1: CMS HEADER WEBSITE (JUDUL & LOGO) -->
+        <div id="header-section" class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fa-solid fa-window-maximize"></i>
+                    CMS Pengaturan Header Website
+                </h2>
             </div>
+            
+            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                Atur judul yang tampil pada tab browser dan logo yang tampil di bagian atas (navbar) seluruh halaman website.
+            </p>
 
-            <div class="form-group full-width">
-                <label for="store_description">Deskripsi Toko (Tentang Kami)</label>
-                <textarea id="store_description" name="store_description" rows="4" required><?= esc($store['store_description'] ?? '') ?></textarea>
-            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="header_title">Judul Atas Website (Browser Tab / Title)</label>
+                    <input type="text" id="header_title" name="header_title" value="<?= esc($store['header_title'] ?? '') ?>" placeholder="Contoh: Jenkeinan's Cake - Bakery & Pastry">
+                    <span style="font-size: 11.5px; color: var(--text-muted); display: block; margin-top: 6px;">
+                        <i class="fa-solid fa-circle-info"></i> Tampil di judul tab browser dan mesin pencari. Jika dikosongkan, otomatis menggunakan Nama Toko.
+                    </span>
+                </div>
 
-            <div class="form-group full-width">
-                <label for="address">Alamat Lengkap Toko</label>
-                <textarea id="address" name="address" rows="2" required><?= esc($store['address'] ?? '') ?></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="store_name">Nama Toko / Brand (Teks Navbar & Footer)</label>
+                    <input type="text" id="store_name" name="store_name" value="<?= esc($store['store_name'] ?? 'Jeikinan Cake') ?>" required>
+                    <span style="font-size: 11.5px; color: var(--text-muted); display: block; margin-top: 6px;">
+                        <i class="fa-solid fa-circle-info"></i> Tampil sebagai teks brand di navbar atas dan footer pada seluruh halaman.
+                    </span>
+                </div>
 
-            <div class="form-group">
-                <label for="whatsapp">Nomor WhatsApp (Contoh: 6281234567890)</label>
-                <input type="text" id="whatsapp" name="whatsapp" value="<?= esc($store['whatsapp'] ?? '') ?>" required>
-            </div>
-
-            <div class="form-group">
-                <label for="instagram">Username Instagram (Contoh: @jeikinancake)</label>
-                <input type="text" id="instagram" name="instagram" value="<?= esc($store['instagram'] ?? '') ?>" required>
-            </div>
-
-            <div class="form-group full-width">
-                <label for="opening_hours">Jam Operasional Toko</label>
-                <input type="text" id="opening_hours" name="opening_hours" value="<?= esc($store['opening_hours'] ?? '') ?>" required>
+                <div class="form-group full-width">
+                    <label for="store_logo_file">Ganti Logo Toko (Tampil di Tengah Banner Hero)</label>
+                    <input type="file" id="store_logo_file" name="store_logo_file" accept="image/*">
+                    <div style="margin-top: 12px; display: flex; align-items: center; gap: 16px; background: var(--bg-primary); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-color);">
+                        <?php if (!empty($store['store_logo'])) : ?>
+                            <img src="<?= base_url('image/' . $store['store_logo']) ?>" alt="Logo Toko" style="height: 48px; width: auto; max-width: 180px; object-fit: contain; background: #ffffff; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color);" onerror="handleImgError(this, 'Logo')">
+                            <div>
+                                <span style="font-size: 13px; font-weight: 700; color: var(--text-dark);">Logo Toko Aktif:</span>
+                                <span style="font-size: 12px; color: var(--text-muted); display: block;">Logo ini tampil di tengah banner hero halaman beranda.</span>
+                            </div>
+                        <?php else : ?>
+                            <span style="font-size: 13px; color: var(--text-muted);">
+                                <i class="fa-solid fa-info-circle"></i> Belum ada logo gambar yang diunggah. Hero banner akan menggunakan logo default.
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h3 style="margin: 28px 0 16px; color: var(--text-dark); font-size: 16px; font-weight: 800; border-top: 1px dashed var(--border-color); padding-top: 20px;">
-            <i class="fa-solid fa-image" style="color: var(--green-primary);"></i> Kelola Gambar Landing Page
-        </h3>
-
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="store_logo_file">Logo Toko</label>
-                <input type="file" id="store_logo_file" name="store_logo_file" accept="image/*">
-                <?php if (!empty($store['store_logo'])) : ?>
-                    <div style="margin-top: 10px;">
-                        <span style="font-size: 12px; color: var(--text-muted);">Logo Saat Ini:</span><br>
-                        <img src="<?= base_url('image/' . $store['store_logo']) ?>" alt="Logo" class="img-thumb" style="width: 80px; height: 80px; margin-top: 4px;" onerror="handleImgError(this, 'Logo')">
-                    </div>
-                <?php endif; ?>
+        <!-- SECTION 2: CMS BANNER HERO LANDING PAGE (FULL-WIDTH) -->
+        <div id="banner-section" class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fa-solid fa-panorama"></i>
+                    CMS Banner Hero Landing Page
+                </h2>
+                <span class="badge badge-green" style="font-size: 12px;">
+                    <i class="fa-solid fa-expand"></i> Otomatis Full-Width
+                </span>
             </div>
 
-            <div class="form-group">
-                <label for="hero_image_file">Gambar Banner Hero Landing Page</label>
-                <input type="file" id="hero_image_file" name="hero_image_file" accept="image/*">
-                <?php if (!empty($store['hero_image'])) : ?>
-                    <div style="margin-top: 10px;">
-                        <span style="font-size: 12px; color: var(--text-muted);">Hero Banner Saat Ini:</span><br>
-                        <img src="<?= base_url('image/' . $store['hero_image']) ?>" alt="Hero Banner" class="img-thumb" style="width: 120px; height: 70px; margin-top: 4px;" onerror="handleImgError(this, 'Hero')">
-                    </div>
-                <?php endif; ?>
-            </div>
+            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                Banner hero akan tampil penuh (<strong>full-width cover</strong>) di bagian paling atas halaman utama. Sistem secara otomatis memperbesar dan menyesuaikan gambar agar menutupi seluruh lebar layar tanpa terpotong berantakan, <strong>meskipun gambar yang diunggah berukuran kecil</strong>.
+            </p>
 
-            <div class="form-group">
-                <label for="store_image_file">Gambar Tentang Toko (About Section)</label>
-                <input type="file" id="store_image_file" name="store_image_file" accept="image/*">
-                <?php if (!empty($store['store_image'])) : ?>
-                    <div style="margin-top: 10px;">
-                        <span style="font-size: 12px; color: var(--text-muted);">Store Image Saat Ini:</span><br>
-                        <img src="<?= base_url('image/' . $store['store_image']) ?>" alt="Store Image" class="img-thumb" style="width: 80px; height: 80px; margin-top: 4px;" onerror="handleImgError(this, 'Store')">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label for="hero_image_file">Pilih Gambar Banner Hero Baru</label>
+                    <input type="file" id="hero_image_file" name="hero_image_file" accept="image/*">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Pratinjau Banner Hero Saat Ini (Tampilan Full-Width):</label>
+                    <?php 
+                        $heroBannerPreview = !empty($store['hero_image']) ? $store['hero_image'] : 'bg-home.png';
+                    ?>
+                    <div style="position: relative; width: 100%; height: 220px; border-radius: 14px; overflow: hidden; border: 2px solid var(--green-border); box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-top: 8px;">
+                        <img src="<?= base_url('image/' . esc($heroBannerPreview)) ?>" alt="Hero Banner Preview" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" onerror="handleImgError(this, 'Banner')">
+                        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%); display: flex; align-items: flex-end; padding: 16px;">
+                            <span style="background: rgba(0,0,0,0.65); color: #ffffff; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;">
+                                <i class="fa-solid fa-eye"></i> Tampilan Banner Aktif di Landing Page
+                            </span>
+                        </div>
                     </div>
-                <?php endif; ?>
+                    <span style="font-size: 12px; color: var(--text-muted); display: block; margin-top: 8px;">
+                        <i class="fa-solid fa-lightbulb" style="color: #f59e0b;"></i> Resolusi apapun yang diunggah akan otomatis dirender secara proporsional penuh (Full-Cover) di atas kolom pencarian produk.
+                    </span>
+                </div>
             </div>
         </div>
 
-        <div style="margin-top: 24px; text-align: right;">
-            <button type="submit" class="btn btn-green">
-                <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Teks & Gambar
-            </button>
+        <!-- SECTION 3: INFORMASI TOKO & TENTANG KAMI -->
+        <div id="store-section" class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fa-solid fa-store"></i>
+                    Informasi Toko & Konten Landing Page
+                </h2>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label for="store_description">Deskripsi Toko (Bagian Tentang Kami)</label>
+                    <textarea id="store_description" name="store_description" rows="4" required placeholder="Tuliskan cerita dan keunggulan toko Anda..."><?= esc($store['store_description'] ?? '') ?></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="address">Alamat Lengkap Toko</label>
+                    <textarea id="address" name="address" rows="2" required placeholder="Alamat fisik toko..."><?= esc($store['address'] ?? '') ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">Nomor WhatsApp (Contoh: 6281234567890)</label>
+                    <input type="text" id="whatsapp" name="whatsapp" value="<?= esc($store['whatsapp'] ?? '') ?>" required placeholder="628xxxxxxxxxx">
+                </div>
+
+                <div class="form-group">
+                    <label for="instagram">Username Instagram (Contoh: @jeikinancake)</label>
+                    <input type="text" id="instagram" name="instagram" value="<?= esc($store['instagram'] ?? '') ?>" required placeholder="@nama_akun">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="opening_hours">Jam Operasional Toko</label>
+                    <input type="text" id="opening_hours" name="opening_hours" value="<?= esc($store['opening_hours'] ?? '') ?>" required placeholder="Misal: Senin - Minggu: 08.00 - 21.00 WIB">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="store_image_file">Gambar Bagian Tentang Toko (About Section)</label>
+                    <input type="file" id="store_image_file" name="store_image_file" accept="image/*">
+                    <?php if (!empty($store['store_image'])) : ?>
+                        <div style="margin-top: 10px; display: flex; align-items: center; gap: 14px;">
+                            <img src="<?= base_url('image/' . $store['store_image']) ?>" alt="Store Image" class="img-thumb" style="width: 70px; height: 70px; border-radius: 10px;" onerror="handleImgError(this, 'Store')">
+                            <span style="font-size: 12px; color: var(--text-muted);">Foto saat ini yang tampil di bagian About Us.</span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div style="margin-top: 28px; text-align: right; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                <button type="submit" class="btn btn-green" style="font-size: 15px; padding: 14px 28px;">
+                    <i class="fa-solid fa-floppy-disk"></i> Simpan Seluruh Perubahan (Header, Banner & Toko)
+                </button>
+            </div>
         </div>
     </form>
-</div>
 
 
 <!-- SECTION 2: KELOLA TESTIMONI PELANGGAN -->
