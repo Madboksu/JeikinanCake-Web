@@ -730,7 +730,7 @@ class ProductSeeder extends Seeder
 
 
             [
-                'product_image' => 'donat.png',
+                'product_image' => '',
                 'product_name' => 'Donat Kentang Topping',
                 'product_desc' => '1L Rp80.000. Setengah Rp40.000.',
                 'product_price' => 80000,
@@ -756,7 +756,7 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'product_image' => 'donut.jpeg',
+                'product_image' => '',
                 'product_name' => 'Bomboloni Kentang Hazelnut',
                 'product_desc' => 'Isi 6. Harga Rp50.000.',
                 'product_price' => 50000,
@@ -769,7 +769,7 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'product_image' => 'donat.png',
+                'product_image' => '',
                 'product_name' => 'Donat Kentang Topping Syusyu',
                 'product_desc' => 'Harga Rp85.000.',
                 'product_price' => 85000,
@@ -782,7 +782,7 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'product_image' => 'donat.png',
+                'product_image' => '',
                 'product_name' => 'Donat Syusyu',
                 'product_desc' => 'Bukan kentang. 1L. Harga Rp60.000.',
                 'product_price' => 60000,
@@ -795,7 +795,7 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'product_image' => 'donut.jpeg',
+                'product_image' => '',
                 'product_name' => 'Bomboloni Syusyu',
                 'product_desc' => 'Bukan kentang. 1L. Harga Rp70.000.',
                 'product_price' => 70000,
